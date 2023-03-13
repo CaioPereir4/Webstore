@@ -1,8 +1,13 @@
+import { CartService } from './services/cart.service';
+import { CartComponent } from './pages/cart/cart.component';
 import { ProductsBoxComponent } from './pages/home/components/products-box/products-box.component';
 import { FiltersComponent } from './pages/home/components/filters/filters.component';
 import { ProductsHeaderComponent } from './pages/home/components/products-header/products-header.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -30,8 +35,8 @@ import { HomeComponent } from './pages/home/home.component';
     HomeComponent,
     ProductsHeaderComponent,
     FiltersComponent,
-    ProductsBoxComponent
-  ],
+    ProductsBoxComponent,
+    CartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -50,7 +55,7 @@ import { HomeComponent } from './pages/home/home.component';
     MatSnackBarModule,
 
   ],
-  providers: [],
+  providers: [CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

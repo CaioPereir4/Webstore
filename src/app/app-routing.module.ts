@@ -1,3 +1,4 @@
+import { CartComponent } from './pages/cart/cart.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,6 +11,10 @@ const routes: Routes = [
     path:'',
     redirectTo:'home',
     pathMatch:'full'
+  },
+  {
+    path:'cart',
+    component:CartComponent
   }
 ];
 

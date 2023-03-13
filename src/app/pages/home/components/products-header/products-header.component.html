@@ -1,5 +1,6 @@
 <mat-card class="mb-4">
   <div class="flex justify-between">
+
       <div>
         <button mat-button [matMenuTriggerFor]="sortByMenu">
             Sort by {{sort}} 
@@ -24,14 +25,15 @@
                 <button mat-menu-item (click)="onItemsUpdate(12)">
                   12
                 </button>
-                <button mat-menu-item (click)="onItemsUpdate(12)">
+                <button mat-menu-item (click)="onItemsUpdate(24)">
                   24
                 </button>
-                <button mat-menu-item (click)="onItemsUpdate(12)">
+                <button mat-menu-item (click)="onItemsUpdate(36)">
                   36
                 </button>
               </mat-menu>
-          </div>
+
+        </div>
 
           <button (click)="onColumsUpdate(1)">
             <mat-icon>view_list</mat-icon>
@@ -42,7 +44,8 @@
           <button (click)="onColumsUpdate(4)">
             <mat-icon>view_comfy</mat-icon>
           </button>
-      </div>
+      
+        </div>
 
   </div>
 </mat-card>
