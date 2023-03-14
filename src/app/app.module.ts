@@ -1,3 +1,4 @@
+import { StoreService } from './services/store.service';
 import { CartService } from './services/cart.service';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductsBoxComponent } from './pages/home/components/products-box/products-box.component';
@@ -55,7 +56,7 @@ import { HomeComponent } from './pages/home/home.component';
     MatSnackBarModule,
 
   ],
-  providers: [CartService],
+  providers: [CartService, StoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

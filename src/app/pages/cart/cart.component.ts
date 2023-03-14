@@ -51,12 +51,31 @@ export class CartComponent implements OnInit {
     return this.CartService.getTotal(items)
   }
 
+  onClearCart():void{
+    this.CartService.clearCart()
+  }
+
+  onRemoveFromCart(item:CartItem):void{
+    this.CartService.onRemoveFromCart(item);
 
 
+  }
+
+  onAddQuantity(item: CartItem):void{
+    this.CartService.addToCart(item)
+  }
+
+  onRemoveQuantity(item:CartItem):void{
+    this.CartService.removeQuantity(item)
+  }
   constructor(private CartService:CartService) { }
 
   ngOnInit() {
-    this.dataSource = this.cart.items
+    
+    this.CartService.cart.subscribe((_cart:Cart)=>{
+      this.cart = _cart
+      this.dataSource = this.cart.items;
+    })
   }
 
 }
