@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { StoreService } from './services/store.service';
 import { CartService } from './services/cart.service';
 import { CartComponent } from './pages/cart/cart.component';
@@ -54,9 +55,11 @@ import { HomeComponent } from './pages/home/home.component';
     MatTableModule,
     MatBadgeModule,
     MatSnackBarModule,
+    HttpClientModule
 
   ],
-  providers: [CartService, StoreService],
+  providers: [CartService, StoreService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

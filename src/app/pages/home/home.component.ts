@@ -1,6 +1,8 @@
+import { StoreService } from './../../services/store.service';
+import { Subscription } from 'rxjs';
 import { Product } from './../../models/product.model';
 import { CartService } from './../../services/cart.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 const ROWS_HEIGHT: {[id:number]:number} = {
   1:400,
@@ -8,29 +10,36 @@ const ROWS_HEIGHT: {[id:number]:number} = {
   4:350
 }
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styles: [
   ]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   cols=3;
-  rowHeight =ROWS_HEIGHT[this.cols]
-
-
-  constructor(private cartService:CartService) { }
-  
-  
+  rowHeight =ROWS_HEIGHT[this.cols];
   category:string | undefined;
 
+  products: Array<Product> | undefined;
+  sort ='desc';
+  count = '12';
+  productsSubscription: Subscription | undefined;
 
-
-
-
+  constructor(private cartService:CartService, private storeService: StoreService) { }
+  
   ngOnInit(): void {
+    this.getProducts();
+
   }
+
+
+  getProducts():void{
+    this.productsSubscription = this.storeService.getAllProducts(this.count,this.sort, this.category).subscribe((_products) =>{
+      this.products = _products
+    })
+  }
+
 
   onColumsCountChange(colsNumber:number):void{
     this.cols = colsNumber
@@ -39,17 +48,34 @@ export class HomeComponent implements OnInit {
 
 
   onShowCategory(newCategory:string):void{
-    this.category = newCategory
+    this.category = newCategory;
+    this.getProducts();
   }
+
+  onItemsCountChange(newCount:number):void{
+    this.count = newCount.toString();
+    this.getProducts();
+  }
+
+  onSortChange(newSort:string):void{
+
+    this.sort = newSort;
+    this.getProducts();
+  }
+
 
   onAddtoCart(product:Product):void{
     this.cartService.addToCart({
       product: product.image,
-      name:product.tittle,
+      name:product.title,
       price: product.price,
       quantity:1,
       id:product.id
     })
   }
-
+  ngOnDestroy(): void {
+    if(this.productsSubscription){
+      this.productsSubscription.unsubscribe();
+    }
+  }
 }

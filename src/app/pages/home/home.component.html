@@ -7,17 +7,19 @@
   </mat-drawer>
   <mat-drawer-container class="p-6">
     <app-products-header
+      (sortChange)="onSortChange($event)"
+      (itemsCountChange)="onItemsCountChange($event)"
       (columsCountChange)="onColumsCountChange($event)"
     ></app-products-header>
   </mat-drawer-container>
   <mat-grid-list gutterSize="16" [cols]="cols" [rowHeight]="rowHeight">
-    
-    <mat-grid-tile>
+    <mat-grid-tile *ngFor="let product of products">
       <app-products-box
-      (addToCart)="onAddtoCart($event)"
+        [product]="product"
+        (addToCart)="onAddtoCart($event)"
         class="w-full"
         [fullWidthMode]="cols === 1"
       ></app-products-box>
     </mat-grid-tile>
-</mat-grid-list>
+  </mat-grid-list>
 </mat-drawer-container>
