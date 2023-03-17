@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { CartService } from './../../services/cart.service';
 import { CartItem } from './../../models/cart.model';
 import { Component, OnInit } from '@angular/core';
 import { Cart } from 'src/app/models/cart.model';
+import { loadStripe } from '@stripe/stripe-js';
 
 @Component({
   selector: 'app-cart',
@@ -15,18 +17,6 @@ export class CartComponent implements OnInit {
     name:'sneakers',
     price:150,
     quantity:1,
-    id:1,
-    },{
-      product:'https://via.placeholder.com/150',
-    name:'sneakers',
-    price:150,
-    quantity:1,
-    id:1,
-    },{
-      product:'https://via.placeholder.com/150',
-    name:'sneakers',
-    price:150,
-    quantity:2,
     id:1,
     },{
       product:'https://via.placeholder.com/150',
@@ -55,6 +45,7 @@ export class CartComponent implements OnInit {
     this.CartService.clearCart()
   }
 
+ 
   onRemoveFromCart(item:CartItem):void{
     this.CartService.onRemoveFromCart(item);
 
@@ -68,7 +59,12 @@ export class CartComponent implements OnInit {
   onRemoveQuantity(item:CartItem):void{
     this.CartService.removeQuantity(item)
   }
-  constructor(private CartService:CartService) { }
+
+  onCheckout():void{
+   alert('It is not possible to checkout, because this site is for learning purposes')
+  }
+
+  constructor(private CartService:CartService, private httpClient:HttpClient) { }
 
   ngOnInit() {
     
